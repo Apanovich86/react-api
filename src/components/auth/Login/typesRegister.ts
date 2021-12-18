@@ -1,3 +1,5 @@
+import {array} from "yup";
+
 export enum AuthActionTypes {
     REGISTER = "REGISTER",
 }
@@ -6,7 +8,8 @@ export interface IRegisterModel {
     name: string,
     email: string,
     password: string,
-    confirmpassword: string
+    confirmpassword: string,
+    photo: string
 }
 
 export interface IUser {

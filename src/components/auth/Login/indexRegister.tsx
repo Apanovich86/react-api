@@ -1,8 +1,7 @@
-import { Form, FormikProvider, useFormik } from "formik";
+import { Form, FormikProvider, Field, useFormik } from "formik";
 import { IRegisterModel } from "./typesRegister";
 import { RegisterSchema } from "./validRegister";
 import {InputGroup} from '../../common/InputGroup';
-import { useActions } from '../../../hooks/useActions';
 import {RegisterUser} from "./actionsRegister";
 
 const RegisterPage = () => {
@@ -11,7 +10,8 @@ const RegisterPage = () => {
     name: "",
     email: "",
     password: "",
-    confirmpassword: ""
+    confirmpassword: "",
+    photo: ""
   };
   const onHandleSubmit = (values: IRegisterModel) => {
     console.log("Server Send data: ", values);
@@ -25,12 +25,13 @@ const RegisterPage = () => {
   });
 
   const { errors, touched, handleChange, handleSubmit } = formik;
-
   return (
     <div className="row">
       <div className="col-md-6 offset-md-3">
         <h1>Реєстрація на сайті</h1>
+
         <FormikProvider value={formik}>
+
           <Form onSubmit={handleSubmit}>
             <InputGroup
               field="name"
@@ -62,11 +63,27 @@ const RegisterPage = () => {
                 error={errors.password}
                 onChange={handleChange}
             />
+            <div className="m10">
+              <input
+                  type="file"
+                  name="photo"
+                  onChange={(event) => {
+                  formik.setFieldValue("photo", event.currentTarget.files![0])
+                  }}
+                  // onChange={(event) =>
+                  // formProps.setFieldValue("photo", event.target.files![0])
+                  // }
+              />
+              <button type="submit">
+                Завантажити</button>
+            </div>
             <button type="submit" className="btn btn-success">
               Реєстрація
             </button>
           </Form>
+
         </FormikProvider>
+
       </div>
     </div>
   );

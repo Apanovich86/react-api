@@ -14,5 +14,6 @@ export const RegisterSchema = Yup.object({
       .matches(/[a-zA-Z]/, 'Пароль має містить латинські символи.'),
 
   confirmpassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+
 });
